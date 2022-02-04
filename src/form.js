@@ -4,7 +4,7 @@ import axios from "axios";
 import M from "materialize-css";
 import Download from "./download";
 
-const URL = "http://127.0.0.1:5000/nlp/table" //api-запрос
+const URL = process.env.REACT_APP_FLASK_API //api-запрос
 
 const Form = (props) =>
 {
