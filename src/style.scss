@@ -25,6 +25,7 @@ body
 }
 
 h1,h2,h3,h4,h5,h6{
+  margin: $indent;
   text-align: center;
   text-decoration:underline ;
   color: $basic_color;
@@ -32,11 +33,11 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .input-field textarea:focus + label {
-  color: $basic_color;
+  color: $basic_color !important;
 }
 .input-field textarea:focus {
-  border-bottom: 1px solid $basic_color ;
-  box-shadow: 0 1px 0 0 $basic_color ;
+  border-bottom: 1px solid $basic_color !important;
+  box-shadow: 0 1px 0 0 $basic_color !important;
 }
 
 .form
@@ -51,6 +52,11 @@ h1,h2,h3,h4,h5,h6{
   padding: $indent $indent*2;
   border-radius: 5px;
   background: rgb(246, 246, 246);
+
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+
   @media (max-width: 768px){
     width: 90%;
   }
@@ -60,11 +66,17 @@ h1,h2,h3,h4,h5,h6{
 {
   border-radius: 5px;
   overflow-y: auto;
-  margin: auto;
+  margin: $indent auto;
   width: 80%;
+
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+
   @media (max-width: 768px){
     width: 90%;
   }
+
 }
 .table
 {
@@ -94,7 +106,7 @@ h1,h2,h3,h4,h5,h6{
   width: 100%;
   display: grid;
   grid-template-columns: 3fr 2fr 2fr 2fr;
-  background-color: #a3fcd9;
+  background-color: #d2d2d2;
 }
 .bar
 {
@@ -114,4 +126,18 @@ h1,h2,h3,h4,h5,h6{
   border: 2px solid black;
   height: 100%;
   width: 100%;
+}
+
+.button
+{
+  position: fixed;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+  margin: $indent;
+  //animation: show 2s ease 1s forwards;
+  //@keyframes show {
+  //  from {opacity: 0;}
+  //  to {opacity: 1;}
+  //}
 }

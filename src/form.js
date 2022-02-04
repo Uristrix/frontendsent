@@ -50,18 +50,9 @@ const Form = (props) =>
 
             <div style={{"margin": "auto"}}>
                 <button className="btn btn-large waves-effect waves-light light-blue"
-                        style={{"width":"9em", 'margin': "0 15px 30px 0"}}
+                        style={{"width":"9em", 'margin': "0 0 30px 0"}}
                         type='submit'
-                        // onClick={}
-                >
-                    Show Table
-                </button>
-                <button className="btn btn-large waves-effect waves-light light-blue"
-                        style={{"width":"9em", 'margin': "0 0 30px 15px"}}
-                        // onClick= {}
-                >
-                    <i className="material-icons left">get_app</i>
-                    XLSX
+                >GET
                 </button>
             </div>
 

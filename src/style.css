@@ -22,6 +22,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  margin: 15px;
   text-align: center;
   text-decoration: underline;
   color: #00aeff;
@@ -29,12 +30,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .input-field textarea:focus + label {
-  color: #00aeff;
+  color: #00aeff !important;
 }
 
 .input-field textarea:focus {
-  border-bottom: 1px solid #00aeff;
-  box-shadow: 0 1px 0 0 #00aeff;
+  border-bottom: 1px solid #00aeff !important;
+  box-shadow: 0 1px 0 0 #00aeff !important;
 }
 
 .form {
@@ -48,6 +49,9 @@ h1, h2, h3, h4, h5, h6 {
   padding: 15px 30px;
   border-radius: 5px;
   background: #f6f6f6;
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
 }
 @media (max-width: 768px) {
   .form {
@@ -58,8 +62,11 @@ h1, h2, h3, h4, h5, h6 {
 .overflow {
   border-radius: 5px;
   overflow-y: auto;
-  margin: auto;
+  margin: 15px auto;
   width: 80%;
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
 }
 @media (max-width: 768px) {
   .overflow {
@@ -95,7 +102,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   display: grid;
   grid-template-columns: 3fr 2fr 2fr 2fr;
-  background-color: #a3fcd9;
+  background-color: #d2d2d2;
 }
 
 .bar {
@@ -113,6 +120,14 @@ h1, h2, h3, h4, h5, h6 {
   border: 2px solid black;
   height: 100%;
   width: 100%;
+}
+
+.button {
+  position: fixed;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+  margin: 15px;
 }
 
 /*# sourceMappingURL=style.css.map */
