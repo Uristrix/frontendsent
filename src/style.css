@@ -55,26 +55,46 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.overflow {
+  border-radius: 5px;
+  overflow-y: auto;
+  margin: auto;
+  width: 80%;
+}
+@media (max-width: 768px) {
+  .overflow {
+    width: 90%;
+  }
+}
+
 .table {
-  width: 1800px;
-  margin: 2em auto;
+  border-radius: 5px;
+  border: 2px solid black;
+  width: 1520px;
+  margin: auto;
+}
+@media (max-width: 768px) {
+  .table {
+    width: 1000px;
+    font-size: 14px;
+  }
 }
 
 .grid {
   width: 100%;
   display: grid;
-  grid-template-columns: 3fr 1fr 4fr 2fr 2fr 2fr;
+  grid-template-columns: 2fr 1fr 3fr 2fr 2fr 2fr;
 }
 
 .second {
-  grid-template-columns: 3fr 1fr 10fr;
+  grid-template-columns: 2fr 1fr 9fr;
   background-color: azure;
 }
 
 .sub {
   width: 100%;
   display: grid;
-  grid-template-columns: 40% 20% 20% 20%;
+  grid-template-columns: 3fr 2fr 2fr 2fr;
   background-color: #a3fcd9;
 }
 

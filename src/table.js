@@ -29,10 +29,13 @@ const Table = (props) =>
     })
 
     return(
-        <div className='table'>
-            <div className='grid'>{bar}</div>
-            <div>{paragraphs}</div>
+        <div className='overflow'>
+            <div className='table'>
+                <div className='grid'>{bar}</div>
+                <div>{paragraphs}</div>
+            </div>
         </div>
+
     )
 }
 

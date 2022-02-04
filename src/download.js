@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import XLSX from 'xlsx';
-import FileSaver from 'file-saver'
-const Download = () =>
+import * as XLSX from 'xlsx';
+import FileSaver from 'file-saver';
+const Download = (data) =>
 {
     let wb = XLSX.utils.book_new();
     wb.Props = {
