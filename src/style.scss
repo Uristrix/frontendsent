@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@900&display=swap');
+$basic_color: #00aeff;
+$indent: 15px;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+body,html{
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+body
+{
+  background: linear-gradient(#313131, white) no-repeat fixed;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+   user-select: none;
+}
+
+h1,h2,h3,h4,h5,h6{
+  text-align: center;
+  text-decoration:underline ;
+  color: $basic_color;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.input-field textarea:focus + label {
+  color: $basic_color;
+}
+.input-field textarea:focus {
+  border-bottom: 1px solid $basic_color ;
+  box-shadow: 0 1px 0 0 $basic_color ;
+}
+.form
+{
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  justify-content: center;
+  justify-items: center;
+  width: 80%;
+  margin: $indent auto;
+  padding: $indent $indent*2;
+  border-radius: 5px;
+  background: rgb(246, 246, 246);
+  @media (max-width: 768px){
+    width: 90%;
+  }
+}
+.table
+{
+  width: 1800px;
+  margin: 2em auto;
+}
+.grid
+{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 3fr 1fr 4fr 2fr 2fr 2fr ;
+
+}
+.second
+{
+  grid-template-columns: 3fr 1fr 10fr;
+  background-color: azure;
+}
+.sub
+{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 40% 20% 20% 20%;
+  background-color: #a3fcd9;
+}
+.bar
+{
+  text-align: center;
+  color: white;
+  background: $basic_color;
+
+}
+.el
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  
+  padding: 5%;
+  border: 2px solid black;
+  height: 100%;
+  width: 100%;
+}
