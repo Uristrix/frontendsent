@@ -2,7 +2,6 @@ import {useForm} from "react-hook-form";
 import React, {useEffect} from 'react';
 import axios from "axios";
 import M from "materialize-css";
-import Download from "./download";
 
 const URL = process.env.REACT_APP_FLASK_API //api-запрос
 
