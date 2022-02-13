@@ -1,19 +1,37 @@
 import {useForm} from "react-hook-form";
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import M from "materialize-css";
 
-const URL = process.env.REACT_APP_FLASK_API //api-запрос
-
+const URL = process.env.REACT_APP_FLASK_API
 const Form = (props) =>
 {
+    const [url, setUrl] = useState(null);
     const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const changeURL = (str) => setUrl(str)
+
     const onSubmit = (data) =>
     {
-        axios.post(URL, data).then(res=>{
-            console.log(res.data)
-            props.updateData(res.data)
-        })
+        props.updateLoad(true)
+        if (url === URL+'nlp/table')
+            axios.post(url, data).then(res=> {
+                props.updateData(res.data)
+                props.updateLoad(false)
+            })
+
+        else
+            axios.post(url, data, { responseType: 'blob' }).then(res=> {
+
+               const url = window.URL.createObjectURL(new Blob([res.data]));
+               const link = document.createElement('a');
+               link.href = url;
+               link.setAttribute('download', 'file.xlsx'); //or any other extension
+               document.body.appendChild(link);
+               link.click();
+               props.updateLoad(false)
+            })
+
     }
 
     useEffect(() =>
@@ -25,7 +43,7 @@ const Form = (props) =>
 
     return(
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
-            <div className="input-field" style={{'min-height':'105px'}}>
+            <div className="input-field" style={{'minHeight':'105px'}}>
                 <textarea
                     id="textarea1"
                     className='materialize-textarea has-character-counter'
@@ -36,7 +54,7 @@ const Form = (props) =>
                 <label htmlFor='textarea1'>Phrases (separated by commas)</label>
             </div>
 
-            <div className='input-field' style={{'min-height':'335px'}}>
+            <div className='input-field' style={{'minHeight':'335px'}}>
                 <textarea
                     id="textarea2"
                     className="materialize-textarea has-character-counter"
@@ -47,11 +65,18 @@ const Form = (props) =>
                 <label htmlFor='textarea2'>Text</label>
             </div>
 
-            <div style={{"margin": "auto"}}>
+            <div style={{'display':'flex'}}>
                 <button className="btn btn-large waves-effect waves-light light-blue"
-                        style={{"width":"9em", 'margin': "0 0 30px 0"}}
+                        style={{"width":"9em", 'margin': "0 15px 30px auto"}}
                         type='submit'
-                >GET
+                        onClick={() => changeURL(URL +'nlp/table')}
+                        >TABLE
+                </button>
+                <button className="btn btn-large waves-effect waves-light light-blue"
+                        style={{"width":"9em", 'margin': "0 auto 30px 15px"}}
+                        type='submit'
+                        onClick={() => changeURL(URL + 'nlp/xlsx')}
+                        >XLSX
                 </button>
             </div>
 

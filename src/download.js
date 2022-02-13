@@ -24,7 +24,8 @@ const Download = (props) => {
         begin += len
     }
 
-    const keys = Object.keys(props.data['data'][0]).concat(Object.keys(props.data['data'][0]['sentences'][0])).slice(0,-1)
+    const keys = Object.keys(props.data['data'][0])
+        .concat(Object.keys(props.data['data'][0]['sentences'][0])).slice(0,-1)
 
     let arr = [keys]
     for(let el of props.data['data'])
@@ -34,7 +35,12 @@ const Download = (props) => {
 
         for(let val of el['sentences'])
         {
-            const sent = [val['text'], val['date/time'].join(', '), val['keywords'].join(', '), val['rest entities'].join(', ')]
+            const sent = [val['text'],
+                val['date/time'].join(', '),
+                val['keywords'].join(', '),
+                val['rest entities'].join(', ')
+            ]
+
             arr.push(temp.concat(sent))
         }
     }

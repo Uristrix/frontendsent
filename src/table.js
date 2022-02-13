@@ -2,7 +2,8 @@ import React from "react";
 
 const Table = (props) =>
 {
-    const keys = Object.keys(props.data['data'][0]).concat(Object.keys(props.data['data'][0]['sentences'][0])).slice(0,-1)
+    const keys = Object.keys(props.data['data'][0])
+        .concat(Object.keys(props.data['data'][0]['sentences'][0])).slice(0,-1)
     const bar = keys.map( (elem, i) => {return <div className= 'el bar' >{elem}</div>})
 
     const paragraphs = props.data['data'].map((el) =>

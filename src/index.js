@@ -3,20 +3,19 @@ import ReactDOM from 'react-dom';
 import Table from "./table";
 import Form from "./form";
 import "./style.css"
-import Download from "./download";
 
 const App = () =>
 {
     const [data, setData] = useState(null)
-
+    const [load, setLoad] = useState(false)
     const updateData = (data) => setData(data)
-
+    const updateLoad = (load) => {setLoad(load); console.log("load")}
     return (
         <div>
-            <h2>Search for offers</h2>
-            <Form updateData = {updateData}/>
+            <nav className="navbar-fixed nav-wrapper brand-logo center blue">Search for offers</nav>
+            {load === true && <div className="progress"><div className="indeterminate"> </div></div>}
+            <Form updateData = {updateData} updateLoad = {updateLoad}/>
             {data !== null && <Table data = {data}/>}
-            {data !== null && <Download data ={data}/>}
         </div>
     );
 }
