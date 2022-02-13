@@ -12,8 +12,14 @@ const App = () =>
     const updateLoad = (load) => {setLoad(load); console.log("load")}
     return (
         <div>
-            <nav className="navbar-fixed nav-wrapper brand-logo center blue">Search for offers</nav>
-            {load === true && <div className="progress"><div className="indeterminate"> </div></div>}
+            <div className="navbar-fixed">
+                <nav className=" nav-wrapper blue">
+                    <div className="brand-logo center ">Search for offers</div>
+                </nav>
+
+            </div>
+
+            {load === true && <div className="progress" style={{'position':'fixed'}}><div className="indeterminate"> </div></div>}
             <Form updateData = {updateData} updateLoad = {updateLoad}/>
             {data !== null && <Table data = {data}/>}
         </div>
