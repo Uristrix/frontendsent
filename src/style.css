@@ -33,7 +33,6 @@ nav {
 h1, h2, h3, h4, h5, h6 {
   margin: 15px;
   text-align: center;
-  text-decoration: underline;
   color: #00aeff;
   font-family: "Montserrat", sans-serif;
 }
@@ -47,6 +46,20 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 1px 0 0 #00aeff !important;
 }
 
+.modal.modal-fixed-footer {
+  border-radius: 5px;
+  height: 40%;
+}
+@media (max-width: 768px) {
+  .modal.modal-fixed-footer {
+    height: 50%;
+  }
+}
+
+.modal.modal-fixed-footer .modal-content {
+  height: 100%;
+}
+
 .progress {
   margin: 0;
   background-color: #ffffff;
@@ -54,6 +67,34 @@ h1, h2, h3, h4, h5, h6 {
 
 .indeterminate {
   background-color: #ff8b00 !important;
+}
+
+.navbar_text {
+  font-size: calc(20px + 10 * ((100vw - 320px) / 960));
+  display: flex;
+  justify-content: center;
+  vertical-align: center;
+  color: white;
+  margin: 0;
+}
+
+.info {
+  display: flex;
+  width: 80%;
+  margin: 15px auto;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 5px;
+  text-align: center;
+  -webkit-box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
+  box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
+  font-size: calc(20px + 10 * ((100vw - 320px) / 960));
+}
+@media (max-width: 768px) {
+  .info {
+    width: 90%;
+  }
 }
 
 .form {
@@ -77,16 +118,28 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.form2 {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  justify-content: center;
+  justify-items: center;
+  width: 100%;
+  margin: auto;
+}
+
 .overflow {
+  position: relative;
   border-radius: 5px;
   overflow-y: auto;
+  overflow-x: auto;
   margin: 15px auto;
   width: 80%;
   opacity: 0;
   -webkit-box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
   box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
-  animation: show 2s ease 1s forwards;
+  animation: show 2s ease 0s forwards;
 }
 @keyframes show {
   from {
@@ -103,19 +156,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .table {
+  font-size: 14px;
+  min-width: 100%;
   border-radius: 5px;
   border: 2px solid black;
-  width: 1520px;
   margin: auto;
 }
 @media (max-width: 768px) {
   .table {
-    width: 1000px;
-    font-size: 14px;
+    font-size: 12px;
   }
 }
 
 .grid {
+  position: relative;
   width: 100%;
   display: grid;
   grid-template-columns: 2fr 1fr 3fr 2fr 2fr 2fr;
@@ -165,6 +219,27 @@ h1, h2, h3, h4, h5, h6 {
   to {
     opacity: 1;
   }
+}
+
+.add-phrases {
+  position: absolute;
+  top: 22%;
+  left: 7px;
+  z-index: 1;
+  transition: 0.5s;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  justify-self: center;
+  justify-items: center;
+  background: #fafafa;
+  width: 300px;
+  position: fixed;
+  left: 50%;
+  margin-left: -150px;
+  bottom: 15px;
 }
 
 /*# sourceMappingURL=style.css.map */

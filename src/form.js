@@ -36,7 +36,7 @@ const Form = (props) =>
 
     useEffect(() =>
     {
-        let ta = document.querySelectorAll('.has-character-counter');
+        const ta = document.querySelectorAll('.has-character-counter');
         M.CharacterCounter.init(ta);
     },[]) //для 1 рендера подрубаем скрипты из materialize
 
