@@ -4,46 +4,86 @@ import axios from "axios";
 import M from "materialize-css";
 
 const URL = process.env.REACT_APP_FLASK_API
+
 const Form = (props) =>
 {
     const [url, setUrl] = useState(null);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [textarea, setTextArea] = useState([])
+    const { register, handleSubmit, formState: { errors } } = useForm({shouldUnregister: true});
 
     const changeURL = (str) => setUrl(str)
 
+    const addTextArea = () =>
+    {
+        textarea.push('key phrases_' + (textarea.length + 1))
+        setTextArea(textarea)
+    }
+
+    const delTextArea = (elem) => {
+
+        if (textarea.length !== 0)
+        {
+            const index = textarea.indexOf(elem) + 1
+            for(let i = index; i <= textarea.length - 1; i++)
+            {
+                let el1 = document.getElementById('key phrases_' + index)
+                let el2 = document.getElementById('key phrases_' + (index+1))
+                el1.value  = el2.value
+            }
+            textarea.pop()
+            setTextArea(textarea)
+        }
+    }
+
     const onSubmit = (data) =>
     {
-        props.updateLoad(true)
+
         if (url === URL+'nlp/table')
-            axios.post(url, data).then(res=> {
-                props.updateData(res.data)
-                props.updateLoad(false)
-            })
+        {
+            props.updateLoad(true)
+            axios.post(url, data)
+                .then(res=> {
+                    props.updateData(res.data)
+                    props.updateLoad(false)
+                    changeURL(URL)
+                })
+                .catch(err =>{
+                    props.updateLoad(false)
+                    changeURL(URL)
+                })
+        }
 
-        else
-            axios.post(url, data, { responseType: 'blob' }).then(res=> {
-
-               const url = window.URL.createObjectURL(new Blob([res.data]));
-               const link = document.createElement('a');
-               link.href = url;
-               link.setAttribute('download', 'file.xlsx'); //or any other extension
-               document.body.appendChild(link);
-               link.click();
-               props.updateLoad(false)
-            })
-
+        else if (url === URL+'nlp/xlsx')
+        {
+            props.updateLoad(true)
+            axios.post(url, data, { responseType: 'blob' })
+                .then(res=> {
+                    const url = window.URL.createObjectURL(new Blob([res.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'file.xlsx'); //or any other extension
+                    document.body.appendChild(link);
+                    link.click();
+                    props.updateLoad(false);
+                    changeURL(URL)
+                })
+                .catch(err =>{
+                    props.updateLoad(false)
+                    changeURL(URL)
+                })
+        }
     }
 
     useEffect(() =>
     {
         const ta = document.querySelectorAll('.has-character-counter');
         M.CharacterCounter.init(ta);
-    },[]) //для 1 рендера подрубаем скрипты из materialize
-
+    })
 
     return(
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
-            <div className="input-field" style={{'minHeight':'105px'}}>
+            <div className='flex-area'>
+                <div className="input-field inputs">
                 <textarea
                     id="textarea1"
                     className='materialize-textarea has-character-counter'
@@ -51,9 +91,37 @@ const Form = (props) =>
                     data-length="100"
                     {...register("phrases", {required: true, maxLength: 100})}
                 />
-                <label htmlFor='textarea1'>Phrases (separated by commas)</label>
-            </div>
+                    <label htmlFor='textarea1'>Phrases (sep. by commas)</label>
+                </div>
 
+                <button className=" add-phrases btn-floating btn-small waves-effect waves-light blue"
+                        onClick={() => addTextArea()}>
+                    <i className="material-icons">add</i>
+                </button>
+            </div>
+            {
+                textarea.map((el) => {
+                        return <div className='flex-area animation'>
+                            <div className="input-field inputs">
+                        <textarea
+                            id={el}
+                            className='materialize-textarea has-character-counter'
+                            style={{"height":"70px"}}
+                            data-length="100"
+                            {...register(el, {required: true, maxLength: 100})}
+                        />
+                                        <label htmlFor='textarea1'>Phrases (sep. by commas)</label>
+                                    </div>
+
+                                    <button className=" add-phrases btn-floating btn-small
+                                            waves-effect waves-light blue"
+                                            onClick={() => delTextArea(el)}>
+                                        <i className="material-icons">close</i>
+                                    </button>
+                                </div>
+                            }
+                )
+            }
             <div className='input-field' style={{'minHeight':'335px'}}>
                 <textarea
                     id="textarea2"
@@ -78,6 +146,7 @@ const Form = (props) =>
                         onClick={() => changeURL(URL + 'nlp/xlsx')}
                         >XLSX
                 </button>
+
             </div>
 
             {errors.exampleRequired && <span>Error(((</span>}

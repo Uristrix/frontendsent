@@ -221,12 +221,40 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.flex-area {
+  display: flex;
+  justify-content: space-between;
+  justify-self: center;
+  justify-items: center;
+  margin: 0;
+}
+
+.animation {
+  opacity: 0;
+  animation: show 1s ease 0s forwards;
+}
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.inputs {
+  min-height: 105px;
+  width: 95%;
+  margin-right: 30px;
+}
+@media (max-width: 768px) {
+  .inputs {
+    width: 80%;
+  }
+}
+
 .add-phrases {
-  position: absolute;
-  top: 22%;
-  left: 7px;
-  z-index: 1;
-  transition: 0.5s;
+  margin: auto;
 }
 
 .footer {

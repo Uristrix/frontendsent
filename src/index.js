@@ -16,7 +16,6 @@ const App = () =>
                 <nav className=" nav-wrapper blue navbar_text">
                     Search for offers
                 </nav>
-
             </div>
 
             {load === true && <div className="progress" style={{'position':'fixed'}}>
