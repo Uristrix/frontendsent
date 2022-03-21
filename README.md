@@ -2,7 +2,7 @@
 
 1)  Clone the repository behind your machine using the command:
     ```
-    https://github.com/Uristrix/frontendsent.git
+    git clone https://github.com/Uristrix/frontendsent.git
     ```
 2) Create an .env file and write the api address, host and port (look at the .env.example file for an example)
 
