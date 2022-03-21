@@ -15,7 +15,7 @@ const Form = (props) =>
 
     const addTextArea = () =>
     {
-        textarea.push('key phrases_' + (textarea.length + 1))
+        textarea.push('add phrases_' + (textarea.length + 1))
         setTextArea(textarea)
     }
 
@@ -26,8 +26,8 @@ const Form = (props) =>
             const index = textarea.indexOf(elem) + 1
             for(let i = index; i <= textarea.length - 1; i++)
             {
-                let el1 = document.getElementById('key phrases_' + index)
-                let el2 = document.getElementById('key phrases_' + (index+1))
+                let el1 = document.getElementById('add phrases_' + index)
+                let el2 = document.getElementById('add phrases_' + (index+1))
                 el1.value  = el2.value
             }
             textarea.pop()
@@ -37,7 +37,7 @@ const Form = (props) =>
 
     const onSubmit = (data) =>
     {
-
+        console.log(data)
         if (url === URL+'nlp/table')
         {
             props.updateLoad(true)
