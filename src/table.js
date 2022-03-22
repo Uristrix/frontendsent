@@ -2,7 +2,7 @@ import React from "react";
 
 const Table = (props) =>
 {
-    const len = () => { return {'width': (1000 +(Object.keys(props.data['data'][0]).length - 1)*150) + 'px'} }
+    const len = () => { return {'width': (1000 +(Object.keys(props.data['data'][0]['sentences'][0]).length - 1)*150) + 'px'} }
 
     const genTemplate = (str) => {
         for(let i = 0; i < Object.keys(props.data['data'][0]['sentences'][0]).length - 1; i++) str += ' 2fr'
