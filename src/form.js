@@ -2,14 +2,28 @@ import {useForm} from "react-hook-form";
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import M from "materialize-css";
-
+import data from "./def_value.txt"
 const URL = process.env.REACT_APP_FLASK_API
 
 const Form = (props) =>
 {
     const [url, setUrl] = useState(null);
-    const [textarea, setTextArea] = useState([])
-    const { register, handleSubmit, formState: { errors } } = useForm({shouldUnregister: true});
+    const [textarea, setTextArea] = useState(['add phrases_1'])
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm({shouldUnregister: true});
+
+    useEffect(() =>
+    {
+        fetch(data).then(r => r.json()
+            .then(r =>
+            {
+                setValue("phrases", r['phrases'])
+                setValue('text', r['text'])
+                setValue('add phrases_1', r['add phrases_1'])
+
+                M.updateTextFields()
+                M.textareaAutoResize(document.getElementById('textarea2'))
+            }))
+    });
 
     const changeURL = (str) => setUrl(str)
 
@@ -37,7 +51,6 @@ const Form = (props) =>
 
     const onSubmit = (data) =>
     {
-        console.log(data)
         if (url === URL+'nlp/table')
         {
             props.updateLoad(true)
@@ -78,7 +91,7 @@ const Form = (props) =>
     {
         const ta = document.querySelectorAll('.has-character-counter');
         M.CharacterCounter.init(ta);
-    })
+    }, [])
 
     return(
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
@@ -122,7 +135,7 @@ const Form = (props) =>
                             }
                 )
             }
-            <div className='input-field' style={{'minHeight':'335px'}}>
+            <div className='input-field' >
                 <textarea
                     id="textarea2"
                     className="materialize-textarea has-character-counter"
