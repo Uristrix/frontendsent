@@ -23,7 +23,13 @@ const Form = (props) =>
                 M.updateTextFields()
                 M.textareaAutoResize(document.getElementById('textarea2'))
             }))
-    });
+    }, []);
+
+    useEffect(() =>
+    {
+        // const ta = document.querySelectorAll('.has-character-counter');
+        // M.CharacterCounter.init(ta);
+    })
 
     const changeURL = (str) => setUrl(str)
 
@@ -87,11 +93,7 @@ const Form = (props) =>
         }
     }
 
-    useEffect(() =>
-    {
-        const ta = document.querySelectorAll('.has-character-counter');
-        M.CharacterCounter.init(ta);
-    }, [])
+
 
     return(
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
