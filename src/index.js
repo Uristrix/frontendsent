@@ -8,8 +8,10 @@ const App = () =>
 {
     const [data, setData] = useState(null)
     const [load, setLoad] = useState(false)
+    const [checkbox, setCheckbox] = useState(false)
     const updateData = (data) => setData(data);
     const updateLoad = (load) => setLoad(load);
+    const changeCheckbox = () => setCheckbox(!checkbox)
     return (
         <div>
             <div className="navbar-fixed">
@@ -22,8 +24,10 @@ const App = () =>
                 <div className="indeterminate"> </div>
             </div>}
 
-            <Form updateData = {updateData} updateLoad = {updateLoad}/>
-            {data !== null && <Table data = {data} updateData = {updateData} updateLoad = {updateLoad}/>}
+            <Form updateData = {updateData} updateLoad = {updateLoad}
+                  checkbox = {checkbox} setCheckbox = {changeCheckbox}/>
+            {data !== null && <Table data = {data} updateData = {updateData} updateLoad = {updateLoad}
+                                     checkbox = {checkbox}/>}
         </div>
     );
 }

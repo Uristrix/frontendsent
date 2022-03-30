@@ -2,22 +2,31 @@ import React from "react";
 
 const Table = (props) =>
 {
-    const len = () => { return {'width': (1000 +(Object.keys(props.data['data'][0]['sentences'][0]).length - 1)*150) + 'px'} }
+    const t = props.checkbox === false? -1:-4
+
+    const len = () => { return {'width': (900 +(Object.keys(props.data['data'][0]['sentences'][0]).length - 1)*150) + 'px'} }
 
     const genTemplate = (str) => {
-        for(let i = 0; i < Object.keys(props.data['data'][0]['sentences'][0]).length - 1; i++) str += ' 2fr'
+        for(let i = 0; i < Object.keys(props.data['data'][0]['sentences'][0]).length + t; i++) str += ' 2fr'
         return {'gridTemplateColumns': str}
     }
 
     const genTemplate2 = (str) => {
-         str += ` ${3 + (Object.keys(props.data['data'][0]['sentences'][0]).length -1) * 2}fr`
+         str += ` ${3 + (Object.keys(props.data['data'][0]['sentences'][0]).length + t) * 2}fr`
         return {'gridTemplateColumns': str}
+    }
+
+    const checkSent = (obj) => {
+        for(let el in obj)
+            if(el !== 'text' && obj[el].length !== 0) return true
+
+        return false
     }
 
     if (props.data['data'].length !== 0)
     {
         const keys = Object.keys(props.data['data'][0])
-            .concat(Object.keys(props.data['data'][0]['sentences'][0])).slice(0,-1)
+            .concat(Object.keys(props.data['data'][0]['sentences'][0])).slice(0,t)
 
         const bar = keys.map( (elem, i) => {return <div className= 'el bar' >{elem}</div>})
 
@@ -30,12 +39,13 @@ const Table = (props) =>
                 }
                 <div>{el['sentences'].map((el2) =>
                     {
-                        return <div className= 'sub' style={genTemplate('3fr')}>
-                            <div className='el'>{el2['text'].join(', ')}</div>
-                            {Object.keys(el2).slice(0,-1).map( (el3) => {
-                                return <div className='el'>{el2[el3].join(', ')}</div>}
-                            )}
-                        </div>
+                        if(checkSent(el2))
+                            return <div className= 'sub' style={genTemplate('3fr')}>
+                                <div className='el'>{el2['text'].join(', ')}</div>
+                                {Object.keys(el2).slice(0,t).map( (el3) => {
+                                    return <div className='el'>{el2[el3].join(', ')}</div>}
+                                )}
+                            </div>
                     })
                 }</div>
             </div>

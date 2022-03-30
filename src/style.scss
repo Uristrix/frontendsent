@@ -70,7 +70,6 @@ h1,h2,h3,h4,h5,h6{
 .indeterminate
 {
   background-color: #ff8b00 !important;
-  z-index: 9999 !important;
 }
 .navbar_text
 {
@@ -269,8 +268,46 @@ h1,h2,h3,h4,h5,h6{
   left: 50%;
   margin-left: -150px;
   bottom: 15px;
+}
+
+.accept
+{
+  display: flex;
+  position: relative;
+  justify-content: left;
+  margin-bottom: $indent;
+  @media (max-width: 768px){
+   flex-direction: column;
+  }
+  .buttons
+  {
+
+    display: flex;
+    justify-content: space-between;
+    *{
+      margin: 0 $indent*2 0 0;
+      width: 150px;
+      @media (max-width: 768px){
+        width: 100px;
+        margin: auto;
+      }
+    }
+  }
+  label
+  {
+    margin: auto 0 auto 0;
+    [type="checkbox"].filled-in:checked + span:after{
+      border: 2px solid black;
+      background-color: $basic_color;
+    }
+    @media (max-width: 768px){
+      margin: $indent auto 0 ;
+    }
+  }
 
 }
+
+
 //* {
 //  scrollbar-width: thin;
 //  scrollbar-color: rgb(132, 132, 132);

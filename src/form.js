@@ -8,7 +8,7 @@ const URL = process.env.REACT_APP_FLASK_API
 const Form = (props) =>
 {
     const [url, setUrl] = useState(null);
-    const [textarea, setTextArea] = useState(['add phrases_1'])
+    const [textarea, setTextArea] = useState(['context_1'])
     const { register, handleSubmit, setValue, formState: { errors } } = useForm({shouldUnregister: true});
 
     useEffect(() =>
@@ -17,25 +17,27 @@ const Form = (props) =>
             .then(r =>
             {
                 setValue("phrases", r['phrases'])
+                setValue('context_1', r['context'])
                 setValue('text', r['text'])
-                setValue('add phrases_1', r['add phrases_1'])
+
 
                 M.updateTextFields()
                 M.textareaAutoResize(document.getElementById('textarea2'))
             }))
+
     }, []);
 
     useEffect(() =>
     {
-        // const ta = document.querySelectorAll('.has-character-counter');
-        // M.CharacterCounter.init(ta);
+        const ta = document.querySelectorAll('.has-character-counter');
+        M.CharacterCounter.init(ta);
     })
 
     const changeURL = (str) => setUrl(str)
 
     const addTextArea = () =>
     {
-        textarea.push('add phrases_' + (textarea.length + 1))
+        textarea.push('context_' + (textarea.length + 1))
         setTextArea(textarea)
     }
 
@@ -46,8 +48,8 @@ const Form = (props) =>
             const index = textarea.indexOf(elem) + 1
             for(let i = index; i <= textarea.length - 1; i++)
             {
-                let el1 = document.getElementById('add phrases_' + index)
-                let el2 = document.getElementById('add phrases_' + (index+1))
+                let el1 = document.getElementById('context_' + index)
+                let el2 = document.getElementById('context_' + (index+1))
                 el1.value  = el2.value
             }
             textarea.pop()
@@ -93,8 +95,6 @@ const Form = (props) =>
         }
     }
 
-
-
     return(
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
             <div className='flex-area'>
@@ -106,16 +106,13 @@ const Form = (props) =>
                     data-length="100"
                     {...register("phrases", {required: true, maxLength: 100})}
                 />
-                    <label htmlFor='textarea1'>Phrases (sep. by commas)</label>
+                    <label htmlFor='textarea1'>Поиск абзацев: введите ключевые слова</label>
                 </div>
 
-                <button className=" add-phrases btn-floating btn-small waves-effect waves-light blue"
-                        onClick={() => addTextArea()}>
-                    <i className="material-icons">add</i>
-                </button>
+
             </div>
             {
-                textarea.map((el) => {
+                textarea.map((el, index) => {
                         return <div className='flex-area animation'>
                             <div className="input-field inputs">
                         <textarea
@@ -125,17 +122,25 @@ const Form = (props) =>
                             data-length="100"
                             {...register(el, {required: true, maxLength: 100})}
                         />
-                                        <label htmlFor='textarea1'>Phrases (sep. by commas)</label>
+                                        <label htmlFor='textarea1'>Контекст: введите ключевые слова</label>
                                     </div>
-
-                                    <button className=" add-phrases btn-floating btn-small
-                                            waves-effect waves-light blue"
-                                            onClick={() => delTextArea(el)}>
-                                        <i className="material-icons">close</i>
-                                    </button>
-                                </div>
+                            {
+                                index === 0 &&
+                                <button className=" add-phrases btn-floating btn-small waves-effect waves-light blue"
+                                    onClick={() => addTextArea()}>
+                                    <i className="material-icons">add</i>
+                                </button>
                             }
-                )
+                            {
+                                index !== 0 &&
+                                <button className=" add-phrases btn-floating btn-small
+                                            waves-effect waves-light blue"
+                                        onClick={() => delTextArea(el)}>
+                                    <i className="material-icons">close</i>
+                                </button>
+                            }
+                        </div>
+                })
             }
             <div className='input-field' >
                 <textarea
@@ -145,23 +150,29 @@ const Form = (props) =>
                     data-length="10000"
                     {...register("text", {required: true, maxLength: 10000})} //максимальная длина по ТЗ
                 />
-                <label htmlFor='textarea2'>Text</label>
+                <label htmlFor='textarea2'>Текст</label>
             </div>
 
-            <div style={{'display':'flex'}}>
-                <button className="btn btn-large waves-effect waves-light light-blue"
-                        style={{"width":"9em", 'margin': "0 15px 30px auto"}}
-                        type='submit'
-                        onClick={() => changeURL(URL +'nlp/table')}
-                        >TABLE
-                </button>
-                <button className="btn btn-large waves-effect waves-light light-blue"
-                        style={{"width":"9em", 'margin': "0 auto 30px 15px"}}
-                        type='submit'
-                        onClick={() => changeURL(URL + 'nlp/xlsx')}
-                        >XLSX
-                </button>
+            <div className='accept'>
+                <div className='buttons'>
+                    <button className="btn btn-large waves-effect waves-light light-blue"
+                        // style={{"width":"9em", 'margin': "0 15px 30px auto"}}
+                            type='submit'
+                            onClick={() => changeURL(URL +'nlp/table')}
+                    >TABLE
+                    </button>
+                    <button className="btn btn-large waves-effect waves-light light-blue"
+                        // style={{"width":"9em", 'margin': "0 auto 30px 15px"}}
+                            type='submit'
+                            onClick={() => changeURL(URL + 'nlp/xlsx')}
+                    >XLSX
+                    </button>
+                </div>
 
+                <label>
+                    <input type="checkbox" className="filled-in checkbox" checked={props.checkbox} onChange={props.setCheckbox}/>
+                    <span>del dt, keywords, rest ent.</span>
+                </label>
             </div>
 
             {errors.exampleRequired && <span>Error(((</span>}
