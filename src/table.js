@@ -18,7 +18,13 @@ const Table = (props) =>
 
     const checkSent = (obj) => {
         for(let el in obj)
-            if(el !== 'text' && obj[el].length !== 0) return true
+        {
+            //if(props.checkbox === false)
+                if(el !== 'text' && obj[el].length !== 0) return true
+
+            //else if(!Object.keys(obj).slice(0, t).includes(el) && obj[el].length !== 0) return true
+        }
+
 
         return false
     }
