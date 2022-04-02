@@ -178,7 +178,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .second {
   grid-template-columns: 2fr 1fr 9fr;
-  background-color: azure;
+  background-color: #f0ffff;
 }
 
 .sub {
@@ -296,7 +296,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 .accept label {
-  margin: auto 0 auto 0;
+  margin: auto 15px auto 0;
 }
 .accept label [type=checkbox].filled-in:checked + span:after {
   border: 2px solid black;
@@ -304,7 +304,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 @media (max-width: 768px) {
   .accept label {
-    margin: 15px auto 0;
+    margin: 15px 15px 0;
   }
 }
 

@@ -1,17 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import Table from "./table";
-import Form from "./form";
-import "./style.css"
 
-const App = () =>
+import {observer} from "mobx-react-lite";
+import appStore from "./store/appStore";
+
+import Table from "./components/table";
+import Form from "./components/form";
+import "./style/style.css"
+
+
+const App = observer(() =>
 {
-    const [data, setData] = useState(null)
-    const [load, setLoad] = useState(false)
-    const [checkbox, setCheckbox] = useState(false)
-    const updateData = (data) => setData(data);
-    const updateLoad = (load) => setLoad(load);
-    const changeCheckbox = () => setCheckbox(!checkbox)
     return (
         <div>
             <div className="navbar-fixed">
@@ -19,17 +18,14 @@ const App = () =>
                     Search for offers
                 </nav>
             </div>
-
-            {load === true && <div className="progress" style={{'position':'fixed'}}>
+            {appStore.load === true && <div className="progress" style={{'position':'fixed'}}>
                 <div className="indeterminate"> </div>
             </div>}
 
-            <Form updateData = {updateData} updateLoad = {updateLoad}
-                  checkbox = {checkbox} setCheckbox = {changeCheckbox}/>
-            {data !== null && <Table data = {data} updateData = {updateData} updateLoad = {updateLoad}
-                                     checkbox = {checkbox}/>}
+            <Form appStore = {appStore}/>
+            {appStore.data !== null && <Table appStore = {appStore}/>}
         </div>
     );
-}
+})
 
 ReactDOM.render(<App/>, document.getElementById('root'));
