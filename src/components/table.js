@@ -43,6 +43,7 @@ const Table = observer((props) =>
             if(!checkSent(el['sentences'][i]))
                 el['sentences'].splice(i, 1)
 
+    table = table.filter((el) => {return el['sentences'].length !== 0})
 
     if (table.length !== 0)
     {
