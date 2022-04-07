@@ -4,9 +4,9 @@ class AppStore
 {
     data = null
     load = false
-    dt_box = true
-    keywords_box = true
-    rest_ent_box = true
+    dt_box = false
+    keywords_box = false
+    rest_ent_box = false
     constructor() { makeAutoObservable(this) }
 
     setData = (data) => { this.data = data}

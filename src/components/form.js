@@ -11,7 +11,7 @@ const URL = process.env.REACT_APP_FLASK_API
 const Form = observer((props) =>
 {
     const [url, setUrl] = useState(null);
-    const [textarea, setTextArea] = useState(['context_1'])
+    const [textarea, setTextArea] = useState(['context_1', "context_2"])
     const { register, handleSubmit, setValue, formState: { errors } } = useForm({shouldUnregister: true});
 
     useEffect(() =>
@@ -20,7 +20,8 @@ const Form = observer((props) =>
             .then(r =>
             {
                 setValue("phrases", r['phrases'])
-                setValue('context_1', r['context'])
+                setValue('context_1', r['context_1'])
+                setValue('context_2', r['context_2'])
                 setValue('text', r['text'])
 
                 M.updateTextFields()
